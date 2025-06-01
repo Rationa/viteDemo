@@ -2,8 +2,11 @@
   "compilerOptions": { // 定义编译是使用的各种选项
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "target": "ES2022",
+    // 指定要包含在编译中的库文件，这里包含ES2023
     "lib": ["ES2023"],
+    /* 用来指定要使用的模块标准: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
     "module": "ESNext",
+    // 跳过对库文件的类型检查 提高编译速度
     "skipLibCheck": true,
 
     /* Bundler mode */
@@ -15,10 +18,13 @@
 
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": true, // 不允许存在未使用的局部变量，有助于提高代码质量和减少潜在的错误。
+    "noUnusedParameters": true, // 不允许存在未使用的函数参数，同样有助于提高代码质量。
     "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true,
+    "noFallthroughCasesInSwitch": true, // 在 switch 语句中，不允许出现没有 break 或 return 的情况，以防止意外的逻辑错误。
+    // 禁止未检查的副作用导入
+    // 如果你导入了一个模块但没有使用其导出的内容，TypeScript 会提示你检查该导入是否必要。
+    // 这有助于避免不必要的导入，减少潜在的副作用，提高代码的可维护性和安全性。
     "noUncheckedSideEffectImports": true
   },
   "include": ["vite.config.ts"]
