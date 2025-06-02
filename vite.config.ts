@@ -1,16 +1,26 @@
 import { defineConfig } from 'vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import vue from '@vitejs/plugin-vue'
 import legacy from "@vitejs/plugin-legacy"
 import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [vue(),
-  // 处理打包后跨域问题
-  legacy({
-    targets: ["ie>=11"],
-    additionalLegacyPolyfills: ["regenerator-runtime/runtime"], //解决跨域警告
-  })
+  plugins: [
+    vue(),
+    // 处理打包后跨域问题
+    legacy({
+      targets: ["ie>=11"],
+      additionalLegacyPolyfills: ["regenerator-runtime/runtime"], //解决跨域警告
+    }),
+    AutoImport({
+      resolvers: [ElementPlusResolver()]
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()]
+    })
   ],
   base: './', // 用于处理打包后的静态文件路径找不到问题
   resolve: {
