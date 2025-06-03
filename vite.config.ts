@@ -4,6 +4,7 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import vue from '@vitejs/plugin-vue'
 import legacy from "@vitejs/plugin-legacy"
+import { visualizer } from "rollup-plugin-visualizer";
 import path from 'path'
 
 // https://vite.dev/config/
@@ -15,12 +16,15 @@ export default defineConfig({
       targets: ["ie>=11"],
       additionalLegacyPolyfills: ["regenerator-runtime/runtime"], //解决跨域警告
     }),
+    // 自动化引入组件
     AutoImport({
       resolvers: [ElementPlusResolver()]
     }),
+    // 组件无需声明 就可引入
     Components({
       resolvers: [ElementPlusResolver()]
-    })
+    }),
+    visualizer() // 查看打包体积
   ],
   base: './', // 用于处理打包后的静态文件路径找不到问题
   resolve: {
