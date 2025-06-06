@@ -48,5 +48,10 @@ export default defineConfig({
       //   preferPathResolver: 'webpack', // 配置路径解析器
       // }
     }
+  },
+  build: {
+    rollupOptions: {
+      
+    }
   }
 })
