@@ -13,7 +13,6 @@ const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg'];
 
 // https://vite.dev/config/
 export default defineConfig({
-  envDir: './src/',
   plugins: [
     vue(),
     // 处理打包后跨域问题
