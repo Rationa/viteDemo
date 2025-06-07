@@ -3,18 +3,20 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import vue from '@vitejs/plugin-vue'
-import legacy from "@vitejs/plugin-legacy"
+// import legacy from "@vitejs/plugin-legacy"
 import path from 'path'
+const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg'];
+//  legacy({
+//     targets: ["ie>=11"],
+//     additionalLegacyPolyfills: ["regenerator-runtime/runtime"], //解决跨域警告
+//   }),
 
 // https://vite.dev/config/
 export default defineConfig({
+  envDir: './src/',
   plugins: [
     vue(),
     // 处理打包后跨域问题
-    legacy({
-      targets: ["ie>=11"],
-      additionalLegacyPolyfills: ["regenerator-runtime/runtime"], //解决跨域警告
-    }),
     AutoImport({
       resolvers: [ElementPlusResolver()]
     }),
@@ -50,8 +52,22 @@ export default defineConfig({
     }
   },
   build: {
+    assetsInlineLimit: 0, // 小于此阈值的导入或引用资源将内联为 base64 编码，以避免额外的 http 请求。设置为 0 可以完全禁用此项。
     rollupOptions: {
-      
-    }
+      output: {
+        entryFileNames: 'js/[name]-[hash].js', // 代码分割后入口文件的名称（入口 chunk）
+        chunkFileNames: 'js/[name]-[hash].js', // 代码分割时对模块的自定义命名 即除了入口文件的路由文件
+        assetFileNames: (assetsInfo) => {
+          if (assetsInfo.names[0].endsWith('.css')) {
+            return '.css/[name]-[hash].css'
+          } else if (imageExtensions.some(ext => assetsInfo.names[0].endsWith(ext))) {
+            return 'images/[name]-[hash].[ext]'
+          } else {
+            return '[asstes]/[name]-[hash].[ext]'
+          }
+        },
+        // format: 'module'
+      },
+    },
   }
 })
