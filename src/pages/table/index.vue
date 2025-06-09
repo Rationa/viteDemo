@@ -6,9 +6,7 @@ const count = ref(0);
 
 </script>
 <template>
-  <div class="">
-
-
-  </div>
+  <div>table</div>
 </template>
-<style lang="scss" scoped></style>
+
+<style scoped></style>
