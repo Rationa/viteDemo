@@ -5,7 +5,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import vue from '@vitejs/plugin-vue'
 // import legacy from "@vitejs/plugin-legacy"
 import path from 'path'
-const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg'];
+// const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg'];
 //  legacy({
 //     targets: ["ie>=11"],
 //     additionalLegacyPolyfills: ["regenerator-runtime/runtime"], //解决跨域警告
@@ -23,7 +23,7 @@ export default defineConfig({
     Components({
       resolvers: [ElementPlusResolver()]
     }),
-    visualizer() // 查看打包体积
+    // visualizer() // 查看打包体积
   ],
   base: './', // 用于处理打包后的静态文件路径找不到问题
   resolve: {
@@ -56,18 +56,25 @@ export default defineConfig({
     assetsInlineLimit: 0, // 小于此阈值的导入或引用资源将内联为 base64 编码，以避免额外的 http 请求。设置为 0 可以完全禁用此项。
     rollupOptions: {
       output: {
-        entryFileNames: 'js/[name]-[hash].js', // 代码分割后入口文件的名称（入口 chunk）
-        chunkFileNames: 'js/[name]-[hash].js', // 代码分割时对模块的自定义命名 即除了入口文件的路由文件
-        assetFileNames: (assetsInfo) => {
-          if (assetsInfo.names[0].endsWith('.css')) {
-            return '.css/[name]-[hash].css'
-          } else if (imageExtensions.some(ext => assetsInfo.names[0].endsWith(ext))) {
-            return 'images/[name]-[hash].[ext]'
-          } else {
-            return '[asstes]/[name]-[hash].[ext]'
-          }
-        },
+        // entryFileNames: 'js/[name]-[hash].js', // 代码分割后入口文件的名称（入口 chunk）
+        // chunkFileNames: 'js/[name]-[hash].js', // 代码分割时对模块的自定义命名 即除了入口文件的路由文件
+        // assetFileNames: (assetsInfo) => {
+        //   if (assetsInfo.names[0].endsWith('.css')) {
+        //     return '.css/[name]-[hash].css'
+        //   } else if (imageExtensions.some(ext => assetsInfo.names[0].endsWith(ext))) {
+        //     return 'images/[name]-[hash].[ext]'
+        //   } else {
+        //     return '[asstes]/[name]-[hash].[ext]'
+        //   }
+        // },
         // format: 'module'
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            return 'ventor'
+          } else if (id.includes('pages')) {
+            console.log('id==>', id)
+          }
+        }
       },
     },
   }

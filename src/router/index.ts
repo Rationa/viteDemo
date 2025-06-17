@@ -14,7 +14,7 @@ const routes = [
   {
     path: '/table',
     name: 'Table',
-    component: () => import('@/pages/table/index.vue')
+    component: () => import('@/pages/table/index.vue'),
   }
 ]
 
