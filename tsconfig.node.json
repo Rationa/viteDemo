@@ -26,6 +26,33 @@
     // 如果你导入了一个模块但没有使用其导出的内容，TypeScript 会提示你检查该导入是否必要。
     // 这有助于避免不必要的导入，减少潜在的副作用，提高代码的可维护性和安全性。
     "noUncheckedSideEffectImports": true
+
+    // target: 指定 ECMAScript 目标版本。
+    // module: 指定生成代码的模块标准。
+    // strict: 启用所有严格类型检查选项，相当于启用 noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes, strictPropertyInitialization 等。
+    // esModuleInterop: 允许通过默认导入语法引入 CommonJS 模块。
+    // outDir: 指定编译后的输出目录。
+    // rootDir: 指定输入文件的根目录。
+    // sourceMap: 生成对应的 .map 文件，便于调试。
+    // removeComments: 从输出文件中移除注释。
+    // noImplicitAny: 在表达式和声明上有隐含的 any 类型时报错。
+    // moduleResolution: 决定模块解析策略。
+    // skipLibCheck: 跳过所有声明文件的类型检查。
+    // forceConsistentCasingInFileNames: 禁止对同一个文件的不一致的引用。
+    // lib: 指定需要包含在编译中的库文件。
+    // allowSyntheticDefaultImports: 允许使用默认导入，即使模块没有默认导出。
+    // experimentalDecorators: 启用实验性的装饰器特性。
+    // emitDecoratorMetadata: 为装饰器提供元数据支持。
+    // baseUrl: 设置解析非相对模块名称的基准目录。
+    // paths: 配置模块名到基于 baseUrl 的路径映射。
+    // typeRoots: 指定包含类型声明的文件夹。
+    // types: 指定需要包含的类型声明文件。
+    // jsx: 指定 JSX 代码生成选项。
+    // declaration: 生成相应的 .d.ts 文件。
+    // noEmit: 不生成输出文件，用于仅进行类型检查。
+    // include: 指定包含的文件或文件夹。
+    // exclude: 指定排除的文件或文件夹。
+                        
   },
   "include": ["vite.config.ts"]
 }
