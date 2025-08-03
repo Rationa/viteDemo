@@ -1,24 +1,19 @@
 <script setup lang="ts">
-import MeunBar from '@/components/meunBar.vue';
+import MeunBar from '@/components/MeunBar.vue';
 
 </script>
 
 <template>
   <div class="layout-container">
-    <!-- <el-container>：外层容器。 当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列， 否则会水平左右排列。/ -->
+    <!-- <el-container>：外层容器 当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列， 否则会水平左右排列/ -->
     <el-container>
-      <el-scrollbar>
-        <!-- <el-aside>：侧边栏容器。 -->
-        <el-aside width="300px">
-          <MeunBar></MeunBar>
-        </el-aside>
-      </el-scrollbar>
+       <MeunBar></MeunBar>
       <el-container>
-        <!-- <el-header>：顶栏容器。 -->
+        <!-- <el-header>：顶栏容器 -->
         <el-header class="el-header">
           Header
         </el-header>
-        <!-- <el-main>：主要区域容器。 -->
+        <!-- <el-main>：主要区域容器 -->
         <el-main class="right-mian">
           <el-scrollbar>
             <router-view></router-view>

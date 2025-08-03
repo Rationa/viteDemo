@@ -4,7 +4,15 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('@/pages/home/index.vue')
+    component: () => import('@/pages/home/index.vue'),
+    children: [
+      {
+        path: 'diff',
+        name: 'diff',
+        component: () => import('@/pages/home/diff/index.vue'),
+        meta: { title: 'diff', icon: 'house' },
+      }
+    ]
   },
   {
     path: '/about',

@@ -1,56 +1,78 @@
 <script setup lang="ts">
+import { ref, computed } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 
-import {
-  Document,
-  Menu as IconMenu,
-  Location,
-  Setting,
-} from '@element-plus/icons-vue'
 
-const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
+const route = useRoute()
+const router = useRouter();
+
+const list = ref([]);
+
+const activeMenu = computed(() => route.path);
+
+const noChilden = computed(() => list.value.filter(item => !item.children || item.children.length === 0))
+const hasChilden = computed(() => list.children && item.children.length > 0)
+
+const handlemenu = (item) => {
+  router.push(item.path);
 }
-const handleClose = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
 
+const handlmenuclild = (item, subItem) => {
+  router.push(item.path + '/' + subItem.path)
+}
 
 </script>
 
 <template>
   <div>
-    <h5 class="mb-2">Default colors</h5>
-    <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
-      <el-sub-menu index="1">
-        <template #title>
-          <span>基础</span>
-        </template>
-        <el-menu-item index="1-1">item one</el-menu-item>
-        <el-menu-item index="1-2">item two</el-menu-item>
-        <el-menu-item index="1-3">item three</el-menu-item>
-        <el-sub-menu index="1-4">
-          <template #title>item four</template>
-          <el-menu-item index="1-4-1">item one</el-menu-item>
-        </el-sub-menu>
-      </el-sub-menu>
-      <el-menu-item index="2">
-        <el-icon><icon-menu /></el-icon>
-        <span>Navigator Two</span>
-      </el-menu-item>
-      <el-menu-item index="3">
-        <el-icon>
-          <document />
-        </el-icon>
-        <span>Navigator Three</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <el-icon>
-          <setting />
-        </el-icon>
-        <span>Navigator Four</span>
-      </el-menu-item>
-    </el-menu>
+    <el-scrollbar>
+      <!-- <el-aside>：侧边栏容器 -->
+      <el-aside width="300px">
+        <h5 class="mb-2">Default colors</h5>
+        <el-menu default-active="2" class="el-menu-vertical-demo" :default-active=activeMenu">
+          <el-menu-item v-for="item in noChilden" :index="item.path" :key="item.path" @click="handlemenu(item)">
+            <component class="icon" :is="item.meta.icon"></component>
+            <span>{{ item.meta.title }}</span>
+          </el-menu-item>
+          <el-sub-menu v-for="item in hasChilden" :index="item.path" :key="item.path">
+            <template #title>
+              <component class="icon" :is="item.meta.icon"></component>
+              <span>{{ item.meta.title }}</span>
+            </template>
+            <el-menu-item v-for="subItem in item.children" :key="subItem.path" :index="subItem.path"
+              @click="handlmenuclild(item, subItem)" class="sub-menu-deep">
+              <component class="icon" :is="subItem.meta.icon"></component>
+              <span>{{ subItem.meta.title }}</span>
+            </el-menu-item>
+          </el-sub-menu>
+        </el-menu>
+      </el-aside>
+    </el-scrollbar>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+.icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+}
+
+.el-menu {
+  border-right: none;
+  font-size: 20px;
+  font-weight: bold;
+
+  h3 {
+    line-height: 48px;
+    text-align: center;
+  }
+}
+
+.el-aside {
+  height: 100%;
+  background-color: #fff;
+  /* box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.2); */
+  border-right: 1px solid #e4e7ed;
+}
+</style>
