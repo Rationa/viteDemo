@@ -2,8 +2,8 @@
 </script>
 
 <template>
-  <div class="home-box">
-    home
+  <div class="provide-and-inject-box">
+    依赖注入provide/inject
   </div>
 </template>
 

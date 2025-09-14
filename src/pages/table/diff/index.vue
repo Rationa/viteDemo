@@ -4,7 +4,6 @@
 
 <template>
   <div>diff</div>
-  <div v-memo=""></div>
 </template>
 
 <style scoped></style>

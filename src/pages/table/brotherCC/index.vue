@@ -2,8 +2,8 @@
 </script>
 
 <template>
-  <div class="home-box">
-    home
+  <div class="provide-and-inject-box">
+    兄弟组件传参
   </div>
 </template>
 

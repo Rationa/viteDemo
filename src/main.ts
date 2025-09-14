@@ -10,5 +10,20 @@ import router from './router/index.ts'
 import App from './App.vue'
 
 const app = createApp(App)
+
+// 使 v-highlight 在所有组件中都可用
+app.directive('highlight', {
+  /* ... */
+  mounted: (el: HTMLElement) => {
+    el.classList.add('is-highlight')
+  }
+})
+
+app.directive('color', (el, binding) => {
+  // 这会在 `mounted` 和 `updated` 时都调用
+  console.log("el==>", el)
+  console.log("binding==>", binding)
+  el.style.color = binding.value
+})
 app.use(router);
-app.use(ElementPlus, {locale}).mount('#app')
+app.use(ElementPlus, { locale }).mount('#app')
