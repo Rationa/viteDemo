@@ -34,6 +34,15 @@ export default defineConfig({
     // extensions 数据的意思是在import组件的时候自动补全.vue等文件后缀
     extensions: ['.js', '.vue', 'ts']
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5173', // 目标接口的域名
+        changeOrigin: true, // 是否改变源地址
+        rewrite: (path) => path.replace(/^\/api/, '') // 路径重写
+      }
+    }
+  },
   //配置scss全局变量
   css: {
     preprocessorOptions: {

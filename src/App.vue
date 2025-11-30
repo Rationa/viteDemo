@@ -9,10 +9,6 @@ import MeunBar from '@/components/MeunBar.vue';
     <el-container>
        <MeunBar></MeunBar>
       <el-container>
-        <!-- <el-header>：顶栏容器 -->
-        <el-header class="el-header">
-          Header
-        </el-header>
         <!-- <el-main>：主要区域容器 -->
         <el-main class="right-mian">
           <el-scrollbar>
