@@ -27,9 +27,13 @@ const props = [
     label: "名字333",
     width: 120,
     render: (row: AnyColumn) => {
-      return row.name == "1" ? "li" : "yuan"
+      return row.name == "1" ? "li" : row.name
     }
   },
+  {
+    prop: "options",
+    label: "操作",
+  }
 ]
 
 const getTableData = ()=> {
@@ -38,6 +42,10 @@ const getTableData = ()=> {
 
 const selectRow = (rows: AnyColumn) => {
   console.log("rows", rows)
+}
+
+const viewDetail = (scope: any) => {
+  console.log("row==>", scope.row.name)
 }
 
 onMounted(() => {
@@ -53,11 +61,17 @@ onMounted(() => {
 
 <template>
   <div class="provide-and-inject-box">
+    <img src="https://ts2.tc.mm.bing.net/th/id/OIP-C.ExoN8JY43TlYC0hCnoU8DwHaDt?w=108&h=108&c=1&bgcl=1fe6d9&r=0&o=7&dpr=1.3&pid=ImgRC&rm=3" alt="" v-bind="{ width: 200, height: 200, alt: 'logo' }">
     <DYTable 
       ref="dyTableRef"
       :tableProps="{ currentRowKey: 'id', border: true }"
       @select="selectRow"
       >
+      <template #options="scope">
+        <el-button type="primary" @click="viewDetail(scope)">详情</el-button>
+        <el-button type="primary">修改</el-button>
+        <el-button type="primary">删除</el-button>
+      </template>
     </DYTable>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ElMessage } from 'element-plus'
 import type { AnyColumn } from 'element-plus/es/components/table-v2/src/common.mjs'
-import { ref, render } from "vue"
+import { ref } from "vue"
 
 type TC = {
   prop: string,
@@ -42,7 +42,6 @@ const selectRow = (rows: AnyColumn) => {
   emit('select', rows);
 }
 
-
 defineProps({
   tableProps: { type: Object, default: () => {} },
 })
@@ -74,9 +73,8 @@ defineExpose({
         align="center"
         v-bind="{ ...item.extends }"
         >
-        <template #header>
-        </template>
-        <template #default="scope">
+        <template v-if="item.type != 'selection'" #default="scope">
+          <slot v-if="item.prop == 'options'" name="options" :row="scope.row"></slot>
           {{ item.render ? item.render(scope.row) : scope.row[scope.column.property] }}
         </template>
       </el-table-column>

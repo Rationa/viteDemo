@@ -10,6 +10,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     DyTable: typeof import('./src/components/dyTable.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
+    ElButton: typeof import('element-plus/es')['ElButton']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElInput: typeof import('element-plus/es')['ElInput']
